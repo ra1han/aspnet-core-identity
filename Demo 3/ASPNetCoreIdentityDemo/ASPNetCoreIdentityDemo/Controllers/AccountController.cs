@@ -103,49 +103,7 @@ namespace ASPNetCoreIdentityDemo.Controllers
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> GetToken(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-
-                if (user != null)
-                {
-                    var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, lockoutOnFailure: false);
-
-                    if (!result.Succeeded)
-                    {
-                        return Unauthorized();
-                    }
-
-                    var claims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, model.Email),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                    };
-
-                    var token = new JwtSecurityToken
-                    (
-                        issuer: _configuration["Token:Issuer"],
-                        audience: _configuration["Token:Audience"],
-                        claims: claims,
-                        expires: DateTime.UtcNow.AddDays(60),
-                        notBefore: DateTime.UtcNow,
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])), SecurityAlgorithms.HmacSha256)
-                    );
-
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
-                }
-            }
-
-            return BadRequest();
         }
 
         private void AddErrors(IdentityResult result)
