@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Cors;
 
 namespace ASPNetCoreIdentityDemo.Controllers
 {
-    [EnableCors("CORSPolicy")]
     [Authorize]
     public class AccountController : Controller
     {
