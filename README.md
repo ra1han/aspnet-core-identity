@@ -14,9 +14,9 @@ Details in this blog post - https://www.codeproject.com/Articles/1216929/ASP-NET
 
 # Demo 3  
 In this demo I added JWT token support on top of Demo 2.  
-Details in this blog post - [coming soon]
+Details in this blog post - https://www.codeproject.com/Articles/1217608/ASP-NET-Core-Identity-Supporting-JWT-Token-for-Use
 
 # Demo 4  
 In this demo I built an Angular 4 project to use the JWT token to Login and access secured api endpoints.  
-Details in this blog post - [coming soon]
+Details in this blog post - https://www.codeproject.com/Articles/1218180/Angular-User-authentication-using-JWT-token
 
